@@ -60,8 +60,8 @@ library CompleteSetLib {
     function calculateBurnPayout(
         uint256 amount
     ) internal pure returns (uint256 payout) {
-        if (amount == 0) revert Errors.ZeroAmount();
         // 1 complete set = 1 collateral
+        // Zero amount returns zero (no revert needed)
         return amount;
     }
 

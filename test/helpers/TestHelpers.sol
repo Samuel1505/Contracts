@@ -55,11 +55,12 @@ contract TestHelpers is Test {
         feeManager = new FeeManager(address(collateral), treasury);
         socialPredictions = new SocialPredictions();
 
-        // Deploy implementation (note: needs actual token addresses, will be set by factory)
+        // Deploy implementation with dummy addresses (not used in clones)
+        // Actual token addresses are set in initialize() per clone
         marketImplementation = new CategoricalMarket(
             address(collateral),
-            address(0), // Placeholder, set per market
-            address(0), // Placeholder, set per market
+            address(0x1111), // Dummy - not used since tokens set in initialize()
+            address(0x2222), // Dummy - not used since tokens set in initialize()
             address(feeManager),
             address(socialPredictions)
         );
@@ -73,7 +74,8 @@ contract TestHelpers is Test {
             admin
         );
 
-        // Transfer ownership
+        // Transfer ownership - factory needs to own FeeManager to register markets
+        feeManager.transferOwnership(address(factory));
         factory.transferOwnership(owner);
         socialPredictions.transferOwnership(owner);
     }
@@ -237,6 +239,20 @@ contract TestHelpers is Test {
     }
 
     /**
+     * @notice Helper to mint complete set as a user
+     */
+    function mintCompleteSetAs(
+        address user,
+        address market,
+        uint256 amount
+    ) internal {
+        vm.startPrank(user);
+        collateral.approve(market, amount);
+        CategoricalMarket(market).mintCompleteSet(amount);
+        vm.stopPrank();
+    }
+
+    /**
      * @notice Helper to resolve market
      */
     function resolveMarket(address market, uint8 winningOutcome) internal {
@@ -335,5 +351,33 @@ contract TestHelpers is Test {
         expectedFee = (collateralAmount * feeBps) / 10000;
         expectedShares = collateralAmount - expectedFee;
         return (expectedShares, expectedFee);
+    }
+
+    /**
+     * @notice Assert that market prices sum to 1
+     */
+    function assertMarketPricesSumToOne(address market) internal view {
+        uint256[] memory prices = CategoricalMarket(market).getOutcomePrices();
+
+        uint256 sum = 0;
+        for (uint256 i = 0; i < prices.length; i++) {
+            sum += prices[i];
+        }
+
+        assertApproxEqRel(sum, 1e18, 0.01e18, "Market prices should sum to 1");
+    }
+
+    /**
+     * @notice Assert that user has expected shares for an outcome
+     */
+    function assertUserHasShares(
+        address user,
+        address market,
+        uint8 outcome,
+        uint256 expectedAmount
+    ) internal view {
+        address outcomeToken = factory.getOutcomeToken(market);
+        uint256 balance = OutcomeToken(outcomeToken).balanceOf(user, outcome);
+        assertEq(balance, expectedAmount, "User should have expected shares");
     }
 }
