@@ -27,7 +27,7 @@ contract SocialIntegrationTest is TestHelpers {
         // Then trade on that prediction
         vm.startPrank(alice);
         collateral.approve(market, 5000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
         vm.stopPrank();
 
         // Check prediction still exists
@@ -42,7 +42,7 @@ contract SocialIntegrationTest is TestHelpers {
         // Trade first
         vm.startPrank(alice);
         collateral.approve(market, 5000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
         vm.stopPrank();
 
         // Then make prediction
@@ -64,7 +64,7 @@ contract SocialIntegrationTest is TestHelpers {
         // Trade
         vm.startPrank(alice);
         collateral.approve(market, 5000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
         vm.stopPrank();
 
         // Resolve market
@@ -100,7 +100,7 @@ contract SocialIntegrationTest is TestHelpers {
         // Trade on outcome 0
         vm.startPrank(alice);
         collateral.approve(market, 5000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
         vm.stopPrank();
 
         // Resolve market with outcome 1 winning
@@ -135,7 +135,7 @@ contract SocialIntegrationTest is TestHelpers {
         // Trade
         vm.startPrank(bob);
         collateral.approve(market, 5000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
         vm.stopPrank();
 
         // Post another comment after trading
@@ -185,7 +185,7 @@ contract SocialIntegrationTest is TestHelpers {
 
             vm.startPrank(alice);
             collateral.approve(currentMarket, 5000 * 1e18);
-            CategoricalMarket(currentMarket).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(currentMarket).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
 
             // Resolve
@@ -253,9 +253,9 @@ contract SocialIntegrationTest is TestHelpers {
         vm.startPrank(alice);
         collateral.approve(market, 5000 * 1e18);
         (uint256 shares, uint256 cost) = CategoricalMarket(market).buyShares(
-            0, 0, type(uint256).max
             0,
-            5000 * 1e18
+            0,
+            type(uint256).max
         );
         vm.stopPrank();
 
@@ -281,7 +281,7 @@ contract SocialIntegrationTest is TestHelpers {
         for (uint256 i = 0; i < 3; i++) {
             vm.startPrank(alice);
             collateral.approve(market, 2000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -310,7 +310,7 @@ contract SocialIntegrationTest is TestHelpers {
             // Trade
             vm.startPrank(alice);
             collateral.approve(currentMarket, 3000 * 1e18);
-            CategoricalMarket(currentMarket).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(currentMarket).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
 
             // Resolve and update

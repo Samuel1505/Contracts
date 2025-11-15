@@ -48,13 +48,13 @@ contract FullMarketFlowTest is TestHelpers {
         // Alice buys outcome 0
         vm.startPrank(alice);
         collateral.approve(market, 5000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max); // Use max uint256 for maxCost
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max); // Use max uint256 for maxCost
         vm.stopPrank();
 
         // Bob buys outcome 1
         vm.startPrank(bob);
         collateral.approve(market, 3000 * 1e18);
-        CategoricalMarket(market).buyShares(1, 0, type(uint256).max); // Use max uint256 for maxCost
+        CategoricalMarket(market).buyShares(1,  0, type(uint256).max); // Use max uint256 for maxCost
         vm.stopPrank();
 
         // Carol mints complete set
@@ -135,7 +135,7 @@ contract FullMarketFlowTest is TestHelpers {
 
             vm.startPrank(alice);
             collateral.approve(currentMarket, 1000 * 1e18);
-            CategoricalMarket(currentMarket).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(currentMarket).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -163,7 +163,7 @@ contract FullMarketFlowTest is TestHelpers {
 
             vm.startPrank(user);
             collateral.approve(market, 100 * 1e18);
-            CategoricalMarket(market).buyShares(outcome, 0, type(uint256).max); // Use max uint256 for maxCost
+            CategoricalMarket(market).buyShares(outcome,  0, type(uint256).max); // Use max uint256 for maxCost
             vm.stopPrank();
         }
 
@@ -184,7 +184,7 @@ contract FullMarketFlowTest is TestHelpers {
         for (uint256 i = 0; i < 10; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max); // Use max uint256 for maxCost
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max); // Use max uint256 for maxCost
             vm.stopPrank();
         }
 
@@ -206,7 +206,7 @@ contract FullMarketFlowTest is TestHelpers {
         // Heavy buying of outcome 0
         vm.startPrank(alice);
         collateral.approve(market, 50_000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max); // Use max uint256 for maxCost
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max); // Use max uint256 for maxCost
         vm.stopPrank();
 
         // Prices should shift
@@ -231,7 +231,7 @@ contract FullMarketFlowTest is TestHelpers {
         // Buy heavily on one outcome to create price imbalance
         vm.startPrank(alice);
         collateral.approve(market, 50_000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max); // Use max uint256 for maxCost
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max); // Use max uint256 for maxCost
         vm.stopPrank();
 
         // Check for arbitrage
@@ -257,7 +257,7 @@ contract FullMarketFlowTest is TestHelpers {
         vm.startPrank(alice);
         collateral.approve(market, 10_000 * 1e18);
         CategoricalMarket(market).addLiquidity(5_000 * 1e18);
-        CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+        CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
         CategoricalMarket(market).mintCompleteSet(1_000 * 1e18);
         vm.stopPrank();
 

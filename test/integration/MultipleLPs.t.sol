@@ -39,7 +39,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 20; i++) {
             vm.startPrank(carol);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(uint8(i % 2), 0, 1000 * 1e18);
+            CategoricalMarket(market).buyShares(uint8(i % 2),  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -78,7 +78,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 10; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -100,7 +100,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 10; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -120,7 +120,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 5; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -162,7 +162,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 15; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -214,7 +214,7 @@ contract MultipleLPsTest is TestHelpers {
 
             vm.startPrank(trader);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(uint8(i % 2), 0, 1000 * 1e18);
+            CategoricalMarket(market).buyShares(uint8(i % 2),  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -240,7 +240,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 10; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
@@ -260,7 +260,7 @@ contract MultipleLPsTest is TestHelpers {
         for (uint256 i = 0; i < 10; i++) {
             vm.startPrank(bob);
             collateral.approve(market, 1000 * 1e18);
-            CategoricalMarket(market).buyShares(0, 0, type(uint256).max);
+            CategoricalMarket(market).buyShares(0,  0, type(uint256).max);
             vm.stopPrank();
         }
 
