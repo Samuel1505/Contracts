@@ -12,8 +12,11 @@ import {LibraryTestWrapper} from "./LibraryTestWrapper.sol";
  * @notice Tests for complete set mechanics
  */
 contract CompleteSetTest is TestHelpers {
+    LibraryTestWrapper wrapper;
+
     function setUp() public {
         setupBase();
+        wrapper = new LibraryTestWrapper();
     }
 
     // ============================================
@@ -29,7 +32,7 @@ contract CompleteSetTest is TestHelpers {
 
     function test_CalculateMintCost_Zero_Reverts() public {
         vm.expectRevert(Errors.ZeroAmount.selector);
-        CompleteSetLib.calculateMintCost(0);
+        wrapper.testCalculateMintCost(0);
     }
 
     function test_CalculateMintCost_LargeAmount() public {
@@ -52,7 +55,7 @@ contract CompleteSetTest is TestHelpers {
 
     function test_CalculateBurnPayout_Zero_ReturnsZero() public {
         uint256 payout = CompleteSetLib.calculateBurnPayout(0);
-        assertEq(payout, 0, "Zero burn should return zero");
+        assertEq(payout, 0, "Burn payout should return zero for zero amount");
     }
 
     // ============================================
@@ -115,7 +118,7 @@ contract CompleteSetTest is TestHelpers {
         uint256[] memory balances = new uint256[](0);
 
         vm.expectRevert(Errors.InvalidOutcomeCount.selector);
-        CompleteSetLib.validateCompleteSet(balances);
+        wrapper.testValidateCompleteSet(balances);
     }
 
     // ============================================
