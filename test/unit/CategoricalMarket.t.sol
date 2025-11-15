@@ -39,6 +39,10 @@ contract CategoricalMarketTest is TestHelpers {
     }
 
     function test_InitializeTwice_Reverts() public {
+        // Get token addresses from factory
+        address outcomeTokenAddr = factory.getOutcomeToken(market);
+        address lpTokenAddr = factory.getLPToken(market);
+        
         // Try to initialize again
         vm.expectRevert(Errors.AlreadyInitialized.selector);
         CategoricalMarket(market).initialize(
@@ -46,7 +50,9 @@ contract CategoricalMarketTest is TestHelpers {
             2,
             block.timestamp + 7 days,
             oracle,
-            10_000 * 1e18
+            10_000 * 1e18,
+            outcomeTokenAddr,
+            lpTokenAddr
         );
     }
 
