@@ -73,7 +73,8 @@ contract TestHelpers is Test {
             admin
         );
 
-        // Transfer ownership
+        // Transfer ownership - factory needs to own FeeManager to register markets
+        feeManager.transferOwnership(address(factory));
         factory.transferOwnership(owner);
         socialPredictions.transferOwnership(owner);
     }
