@@ -12,14 +12,36 @@ remappings = [
 # Compiler settings
 solc_version = "0.8.24"
 optimizer = true
-optimizer_runs = 200
-via_ir = false
+optimizer_runs = 1
+via_ir = true
+evm_version = "cancun"
 
 # Testing
 gas_reports = ["*"]
-fuzz_runs = 256
+
+# Fuzzing
+[fuzz]
+runs = 256
 
 # Formatting
+[fmt]
 line_length = 100
 tab_width = 4
 bracket_spacing = false
+
+
+[rpc_endpoints]
+primordial = "​https://rpc.primordial.bdagscan.com/"  
+localhost = "http://localhost:8545"
+
+# Block Explorer / Etherscan Configuration
+[etherscan]
+primordial = { key = "no-api-key-needed", url = "https://primordial.bdagscan.com/api", browserUrl = "https://primordial.bdagscan.com" }
+
+# Network-specific profiles
+# Note: Gas price (1 Gwei = 1000000000) and gas limit (8000000) should be passed via command line:
+# --gas-price 1000000000 --gas-limit 8000000
+# Timeout (200000ms) is handled by the RPC provider
+[profile.primordial]
+chain_id = 1043
+
